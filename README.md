@@ -1,2 +1,257 @@
 # olikochamcie
 Strona dla mojej ukochanej dziewczyny
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nasz Świat</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .heart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .heart {
+            position: relative;
+            width: 200px;
+            height: 180px;
+            animation: pulse 1s infinite;
+            margin: 20px;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '\2665'; /* Unicode character for heart */
+            position: absolute;
+            font-size: 150px;
+            color: #ff0000;
+            transform: rotate(-45deg);
+        }
+
+        .heart::before {
+            left: 75px;
+            top: -40px;
+        }
+
+        .heart::after {
+            left: 0;
+            top: -40px;
+        }
+
+        .initials {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #fff;
+            z-index: 1; /* Umieść inicjały na wierzchu */
+        }
+
+        .plus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #fff;
+            z-index: 1; /* Umieść napis "plus" na wierzchu */
+        }
+
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: #333;
+            text-align: center;
+            cursor: pointer;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab:hover {
+            background-color: #555;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .content {
+            background-color: #333;
+            padding: 20px;
+            display: none;
+            border-radius: 5px;
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .flowers {
+            margin-top: 50px;
+            font-size: 72px;
+            color: #4CAF50;
+            animation: float 4s infinite;
+        }
+
+        .dog {
+            margin-top: 20px;
+            font-size: 36px;
+            color: #8B4513;
+            animation: walk 4s infinite;
+        }
+
+        .bee-container {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .bee {
+            font-size: 36px;
+            color: #FFD700;
+            position: absolute;
+            animation: fly 2s infinite;
+        }
+
+        .grass {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20%;
+            background-color: #228B22;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes walk {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+        }
+
+        @keyframes fly {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            50% { transform: translateX(20px) translateY(-20px) rotate(45deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-container">
+        <div class="heart" id="heart-o">
+            <div class="initials">O</div>
+        </div>
+
+        <div class="plus">+</div>
+
+        <div class="heart" id="heart-d">
+            <div class="initials">D</div>
+        </div>
+    </div>
+
+    <div class="tab-container">
+        <div class="tab" id="uczucia-tab">Uczucia</div>
+        <div class="tab" id="zycie-tab">Życie</div>
+    </div>
+
+    <div class="content-container">
+        <div class="content" id="uczucia-content">
+            <p>Kocham Cię nieskończoność razy nieskończoność!</p>
+            <p>Twoje uśmiechy są dla mnie jak promienie słońca, rozjaśniające każdy dzień. Z Tobą jestem najszczęśliwszy, a nasza miłość jest jak najpiękniejsza melodia.</p>
+            <div class="flowers">&#10048; &#127799; &#127799; &#127799; &#10048;</div>
+        </div>
+
+        <div class="content" id="zycie-content">
+            <p>Życie z Tobą to najpiękniejsza podróż...</p>
+            <p>Razem przeszliśmy przez wiele chwil radości, trudności i wzajemnych wspomnień. Każdy dzień z Tobą jest dla mnie darem, za który jestem niesamowicie wdzięczny.</p>
+            <div class="dog">&#128021;</div>
+            <div class="bee-container">
+                <div class="bee">&#128029;</div>
+            </div>
+            <div class="grass"></div>
+        </div>
+    </div>
+
+    <script>
+        // Dodaj obsługę zmiany zakładki
+        document.getElementById('uczucia-tab').addEventListener('click', function() {
+            document.getElementById('uczucia-content').classList.add('active');
+            document.getElementById('zycie-content').classList.remove('active');
+        });
+
+        document.getElementById('zycie-tab').addEventListener('click', function() {
+            document.getElementById('zycie-content').classList.add('active');
+            document.getElementById('uczucia-content').classList.remove('active');
+        });
+
+        // Dodaj ruch pszczoły
+        const bee = document.querySelector('.bee');
+        bee.style.top = '50%';
+        bee.style.left = '0';
+
+        let beeLeft = 0;
+        let beeTop = window.innerHeight * 0.1;
+        let beeDirection = 1;
+
+        function moveBee() {
+            beeLeft += 2 * beeDirection;
+            beeTop += 0.5;
+
+            if (beeLeft > window.innerWidth || beeLeft < 0) {
+                beeDirection *= -1;
+            }
+
+            if (beeTop > window.innerHeight * 0.9) {
+                beeTop = window.innerHeight * 0.1;
+            }
+
+            bee.style.left = `${beeLeft}px`;
+            bee.style.top = `${beeTop}px`;
+
+            requestAnimationFrame(moveBee);
+        }
+
+        moveBee();
+    </script>
+</body>
+</html>
